@@ -1,0 +1,4 @@
+[
+	{ "id": "username", "selector": "div.container section div.page-header h1 span" },
+	{ "id": "formerUsername", "selector": "div.container section div.page-header h1 small", "filter": "formerly ( )" }
+]
