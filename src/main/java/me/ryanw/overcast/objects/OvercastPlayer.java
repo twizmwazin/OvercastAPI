@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+import me.ryanw.overcast.MappingParser;
 import org.jsoup.nodes.Document;
 
 import java.util.List;
@@ -12,7 +13,13 @@ import java.util.List;
 @Getter(AccessLevel.PUBLIC)
 public class OvercastPlayer {
 
-    public OvercastPlayer(Document doc) {}
+    public OvercastPlayer(Document doc) {
+        MappingParser parser = new MappingParser(doc);
+        this.username = parser.getEntry("username");
+        this.formerUsername = Optional.fromNullable(parser.getEntry("formerUsername"));
+        this.globalKills = Integer.parseInt(parser.getEntry("globalKills"));
+        this.globalDeaths = Integer.parseInt(parser.getEntry("globalDeaths"));
+    }
 
     /**
      * User Details
