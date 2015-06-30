@@ -62,11 +62,6 @@
                 </executions>
                 <configuration>
                     <minimizeJar>true</minimizeJar>
-                    <artifactSet>
-                        <includes>
-                            <include>org.jsoup:jsoup</include>
-                        </includes>
-                    </artifactSet>
                 </configuration>
             </plugin>
         </plugins>
