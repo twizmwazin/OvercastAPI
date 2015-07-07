@@ -23,172 +23,102 @@ public class MappingParser {
     }
 
     /**
-     * Sends a call to {@link #getEntry(String)}, it will select the content at the cssQuery provided and then
-     * parse the result if a filter is provided and return the result as a byte object type.
+     * Sends a call to {@link #getEntry(String)} and returns the result.
      * @param id The id of the json object to fetch and return as a byte
      * @return Filtered byte result of a {@link #getEntry(String)}
-     * @throws IOException Passed on from {@link #getEntry(String)} to be handled by the user.
      */
-    public Byte getByte(String id) throws IOException {
-        JsonObject jsonObject = getEntry(id);
-        if (jsonObject != null) {
-            if (jsonObject.get("filter") != null) {
-                String regex = Pattern.compile(doc.select(jsonObject.get("filter").getAsString()).text()).toString();
-                return Byte.parseByte(doc.select(jsonObject.get("selector").getAsString()).text().replaceAll(regex, ""));
-            }
-            return Byte.parseByte(doc.select(jsonObject.get("selector").getAsString()).text());
-        }
-        return null;
+    public Byte getByte(String id) {
+        return Byte.parseByte(getEntry(id));
     }
 
     /**
-     * Sends a call to {@link #getEntry(String)}, it will select the content at the cssQuery provided and then
-     * parse the result if a filter is provided and return the result as a short object type.
+     * Sends a call to {@link #getEntry(String)} and returns the result.
      * @param id The id of the json object to fetch and return as a short
-     * @return Filtered short result of a {@link #getEntry(String)}
-     * @throws IOException Passed on from {@link #getEntry(String)} to be handled by the user.
+     * @return Short result of a {@link #getEntry(String)}
      */
-    public Short getShort(String id) throws IOException {
-        JsonObject jsonObject = getEntry(id);
-        if (jsonObject != null) {
-            if (jsonObject.get("filter") != null) {
-                String regex = Pattern.compile(doc.select(jsonObject.get("filter").getAsString()).text()).toString();
-                return Short.parseShort(doc.select(jsonObject.get("selector").getAsString()).text().replaceAll(regex, ""));
-            }
-            return Short.parseShort(doc.select(jsonObject.get("selector").getAsString()).text());
-        }
-        return null;
+    public Short getShort(String id) {
+        return Short.parseShort(getEntry(id));
     }
 
     /**
-     * Sends a call to {@link #getEntry(String)}, it will select the content at the cssQuery provided and then
-     * parse the result if a filter is provided and return the result as a long object type.
+     * Sends a call to {@link #getEntry(String)} and returns the result.
      * @param id The id of the json object to fetch and return as a long
-     * @return Filtered long result of a {@link #getEntry(String)}
-     * @throws IOException Passed on from {@link #getEntry(String)} to be handled by the user.
+     * @return Long result of a {@link #getEntry(String)}
      */
-    public Long getLong(String id) throws IOException {
-        JsonObject jsonObject = getEntry(id);
-        if (jsonObject != null) {
-            if (jsonObject.get("filter") != null) {
-                String regex = Pattern.compile(doc.select(jsonObject.get("filter").getAsString()).text()).toString();
-                return Long.parseLong(doc.select(jsonObject.get("selector").getAsString()).text().replaceAll(regex, ""));
-            }
-            return Long.parseLong(doc.select(jsonObject.get("selector").getAsString()).text());
-        }
-        return null;
+    public Long getLong(String id) {
+        return Long.parseLong(getEntry(id));
     }
 
     /**
-     * Sends a call to {@link #getEntry(String)}, it will select the content at the cssQuery provided and then
-     * parse the result if a filter is provided and return the result as a float object type.
+     * Sends a call to {@link #getEntry(String)} and returns the result.
      * @param id The id of the json object to fetch and return as a float
-     * @return Filtered float result of a {@link #getEntry(String)}
-     * @throws IOException Passed on from {@link #getEntry(String)} to be handled by the user.
+     * @return Float result of a {@link #getEntry(String)}
      */
-    public Float getFloat(String id) throws IOException {
-        JsonObject jsonObject = getEntry(id);
-        if (jsonObject != null) {
-            if (jsonObject.get("filter") != null) {
-                String regex = Pattern.compile(doc.select(jsonObject.get("filter").getAsString()).text()).toString();
-                return Float.parseFloat(doc.select(jsonObject.get("selector").getAsString()).text().replaceAll(regex, ""));
-            }
-            return Float.parseFloat(doc.select(jsonObject.get("selector").getAsString()).text());
-        }
-        return null;
+    public Float getFloat(String id) {
+        return Float.parseFloat(getEntry(id));
     }
 
     /**
-     * Sends a call to {@link #getEntry(String)}, it will select the content at the cssQuery provided and then
-     * parse the result if a filter is provided and return the result as a double object type.
+     * Sends a call to {@link #getEntry(String)} and returns the result.
      * @param id The id of the json object to fetch and return as a double
-     * @return Filtered double result of a {@link #getEntry(String)}
-     * @throws IOException Passed on from {@link #getEntry(String)} to be handled by the user.
+     * @return Double result of a {@link #getEntry(String)}
      */
-    public Double getDouble(String id) throws IOException {
-        JsonObject jsonObject = getEntry(id);
-        if (jsonObject != null) {
-            if (jsonObject.get("filter") != null) {
-                String regex = Pattern.compile(doc.select(jsonObject.get("filter").getAsString()).text()).toString();
-                return Double.parseDouble(doc.select(jsonObject.get("selector").getAsString()).text().replaceAll(regex, ""));
-            }
-            return Double.parseDouble(doc.select(jsonObject.get("selector").getAsString()).text());
-        }
-        return null;
+    public Double getDouble(String id) {
+        return Double.parseDouble(getEntry(id));
     }
 
     /**
-     * Sends a call to {@link #getEntry(String)}, it will select the content at the cssQuery provided and then
-     * parse the result if a filter is provided and return the result as a boolean object type.
+     * Sends a call to {@link #getEntry(String)} and returns the result.
      * @param id The id of the json object to fetch and return as a boolean
-     * @return Filtered boolean result of a {@link #getEntry(String)}
-     * @throws IOException Passed on from {@link #getEntry(String)} to be handled by the user.
+     * @return Boolean result of a {@link #getEntry(String)}
      */
-    public Boolean getBoolean(String id) throws IOException {
-        JsonObject jsonObject = getEntry(id);
-        if (jsonObject != null) {
-            if (jsonObject.get("filter") != null) {
-                String regex = Pattern.compile(doc.select(jsonObject.get("filter").getAsString()).text()).toString();
-                return Boolean.parseBoolean(doc.select(jsonObject.get("selector").getAsString()).text().replaceAll(regex, ""));
-            }
-            return Boolean.parseBoolean(doc.select(jsonObject.get("selector").getAsString()).text());
-        }
-        return null;
+    public Boolean getBoolean(String id) {
+        return Boolean.parseBoolean(getEntry(id));
     }
 
     /**
-     * Sends a call to {@link #getEntry(String)}, it will select the content at the cssQuery provided and then
-     * parse the result if a filter is provided and return the result as a integer object type.
+     * Sends a call to {@link #getEntry(String)} and returns the result.
      * @param id The id of the json object to fetch and return as a integer
-     * @return Filtered integer result of a {@link #getEntry(String)}
-     * @throws IOException Passed on from {@link #getEntry(String)} to be handled by the user.
+     * @return Integer result of a {@link #getEntry(String)}
      */
-    public Integer getInteger(String id) throws IOException {
-        JsonObject jsonObject = getEntry(id);
-        if (jsonObject != null) {
-            if (jsonObject.get("filter") != null) {
-                String regex = Pattern.compile(doc.select(jsonObject.get("filter").getAsString()).text()).toString();
-                return Integer.parseInt(doc.select(jsonObject.get("selector").getAsString()).text().replaceAll(regex, ""));
-            }
-            return Integer.parseInt(doc.select(jsonObject.get("selector").getAsString()).text());
-        }
-        return null;
+    public Integer getInteger(String id) {
+        return Integer.parseInt(getEntry(id));
     }
 
     /**
-     * Sends a call to {@link #getEntry(String)}, it will select the content at the cssQuery provided and then
-     * parse the result if a filter is provided and return the result as a string object type.
+     * Sends a call to {@link #getEntry(String)} and returns the result, alternative call.
      * @param id The id of the json object to fetch and return as a string
-     * @return Filtered string result of a {@link #getEntry(String)}
-     * @throws IOException Passed on from {@link #getEntry(String)} to be handled by the user.
+     * @return String result of a {@link #getEntry(String)}
      */
-    public String getString(String id) throws IOException {
-        JsonObject jsonObject = getEntry(id);
-        if (jsonObject != null) {
-            if (jsonObject.get("filter") != null) {
-                String regex = Pattern.compile(doc.select(jsonObject.get("filter").getAsString()).text()).toString();
-                return doc.select(jsonObject.get("selector").getAsString()).text().replaceAll(regex, "");
-            }
-            return doc.select(jsonObject.get("selector").getAsString()).text();
-        }
-        return null;
+    public String getString(String id) {
+        return getEntry(id);
     }
 
     /**
      * Searches through a JsonArray created from the mappings.json file for one that has the same ID as one passed
      * through as a method arg. If it can't find one, the method will return null.
      * @param id The id of the json object to look for
-     * @return JsonObject that can be filtered and converted to the correct object type
-     * @throws IOException Thrown if there is a error parsing the mappings from the location provided
+     * @return String that can be converted into the correct primitive type
      */
-    public JsonObject getEntry(String id) throws IOException {
-        String mappings = new JsonParser().parse(new InputStreamReader(new URL(location).openStream())).toString();
-        if (mappings == null) throw new NullPointerException("Mappings location cannot be null!");
-        JsonArray jsonArray = (JsonArray) new JsonParser().parse(mappings);
+    public String getEntry(String id) {
+        String mappings;
+        try {
+            mappings = new JsonParser().parse(new InputStreamReader(new URL(location).openStream())).toString();
+            if (mappings == null) throw new NullPointerException("Mappings location cannot be null!");
+            JsonArray jsonArray = (JsonArray) new JsonParser().parse(mappings);
 
-        for (int i =0; i < jsonArray.size(); i++) {
-            JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-            if (jsonObject.get("id").getAsString().equals(id)) return jsonObject;
+            for (int i = 0; i < jsonArray.size(); i++) {
+                JsonObject jsonObject = (JsonObject) jsonArray.get(i);
+                if (jsonObject.get("id").getAsString().equals(id)) {
+                    if (jsonObject.get("filter") != null) {
+                        String regex = Pattern.compile(doc.select(jsonObject.get("filter").getAsString()).text()).toString();
+                        return doc.select(jsonObject.get("selector").getAsString()).text().replaceAll(regex, "");
+                    }
+                    return doc.select(jsonObject.get("selector").getAsString()).text();
+                }
+            }
+        } catch (IOException e) {
+            return null;
         }
         return null;
     }
