@@ -7,18 +7,19 @@ import lombok.Setter;
 import me.ryanw.overcast.MappingParser;
 import org.jsoup.nodes.Document;
 
+import java.io.IOException;
 import java.util.List;
 
 @Setter(AccessLevel.PRIVATE)
 @Getter(AccessLevel.PUBLIC)
 public class OvercastPlayer {
 
-    public OvercastPlayer(Document doc) {
+    public OvercastPlayer(Document doc) throws IOException {
         MappingParser parser = new MappingParser(doc);
-        this.username = parser.getEntry("username");
-        this.formerUsername = Optional.fromNullable(parser.getEntry("formerUsername"));
-        this.globalKills = Integer.parseInt(parser.getEntry("globalKills"));
-        this.globalDeaths = Integer.parseInt(parser.getEntry("globalDeaths"));
+        this.username = parser.getString("username");
+        this.formerUsername = Optional.fromNullable(parser.getString("formerUsername"));
+        this.globalKills = parser.getInteger("globalKills");
+        this.globalDeaths = parser.getInteger("globalDeaths");
     }
 
     /**
