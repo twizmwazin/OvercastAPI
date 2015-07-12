@@ -4,7 +4,7 @@ import com.google.common.base.Optional;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
-import me.ryanw.overcast.MappingParser;
+import me.ryanw.overcast.mappings.MappingsParser;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
@@ -15,9 +15,9 @@ import java.util.List;
 public class OvercastPlayer {
 
     public OvercastPlayer(Document doc) throws IOException {
-        MappingParser parser = new MappingParser(doc);
-        this.username = parser.getString("username");
-        this.formerUsername = Optional.fromNullable(parser.getString("formerUsername"));
+        MappingsParser parser = new MappingsParser(doc);
+        //this.username = parser.getString("username");
+        //this.formerUsername = Optional.fromNullable(parser.getString("formerUsername"));
         this.globalKills = parser.getInteger("globalKills");
         this.globalDeaths = parser.getInteger("globalDeaths");
     }

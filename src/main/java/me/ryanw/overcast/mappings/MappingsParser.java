@@ -1,29 +1,31 @@
-package me.ryanw.overcast;
+package me.ryanw.overcast.mappings;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class MappingParser {
+public class MappingsParser {
 
-    private final String location = "https://raw.githubusercontent.com/ryanw-se/OvercastAPI/master/mappings/mappings.json";
-    private final Document doc;
+    private final String url = "https://raw.githubusercontent.com/ryanw-se/OvercastAPI/master/mappings/mappings.json";
+    private final JsonReader jsonReader;
+    private final Document document;
 
-    public MappingParser(Document doc) {
-        this.doc = doc;
+    public MappingsParser(Document document) throws IOException {
+        this.document = document;
+        this.jsonReader = new JsonReader(new InputStreamReader(new URL(url).openStream()));
     }
 
     /**
      * Sends a call to {@link #getEntry(String)} and returns the result.
+     *
      * @param id The id of the json object to fetch and return as a byte
      * @return Filtered byte result of a {@link #getEntry(String)}
      */
@@ -33,6 +35,7 @@ public class MappingParser {
 
     /**
      * Sends a call to {@link #getEntry(String)} and returns the result.
+     *
      * @param id The id of the json object to fetch and return as a short
      * @return Short result of a {@link #getEntry(String)}
      */
@@ -42,6 +45,7 @@ public class MappingParser {
 
     /**
      * Sends a call to {@link #getEntry(String)} and returns the result.
+     *
      * @param id The id of the json object to fetch and return as a long
      * @return Long result of a {@link #getEntry(String)}
      */
@@ -51,6 +55,7 @@ public class MappingParser {
 
     /**
      * Sends a call to {@link #getEntry(String)} and returns the result.
+     *
      * @param id The id of the json object to fetch and return as a float
      * @return Float result of a {@link #getEntry(String)}
      */
@@ -60,6 +65,7 @@ public class MappingParser {
 
     /**
      * Sends a call to {@link #getEntry(String)} and returns the result.
+     *
      * @param id The id of the json object to fetch and return as a double
      * @return Double result of a {@link #getEntry(String)}
      */
@@ -69,6 +75,7 @@ public class MappingParser {
 
     /**
      * Sends a call to {@link #getEntry(String)} and returns the result.
+     *
      * @param id The id of the json object to fetch and return as a boolean
      * @return Boolean result of a {@link #getEntry(String)}
      */
@@ -78,6 +85,7 @@ public class MappingParser {
 
     /**
      * Sends a call to {@link #getEntry(String)} and returns the result.
+     *
      * @param id The id of the json object to fetch and return as a integer
      * @return Integer result of a {@link #getEntry(String)}
      */
@@ -87,6 +95,7 @@ public class MappingParser {
 
     /**
      * Sends a call to {@link #getEntry(String)} and returns the result, alternative call.
+     *
      * @param id The id of the json object to fetch and return as a string
      * @return String result of a {@link #getEntry(String)}
      */
@@ -95,31 +104,32 @@ public class MappingParser {
     }
 
     /**
-     * Searches through a JsonArray created from the mappings.json file for one that has the same ID as one passed
-     * through as a method arg. If it can't find one, the method will return null.
-     * @param id The id of the json object to look for
-     * @return String that can be converted into the correct primitive type
+     * Gets a entry from the mappings file, passes the selector through Jsoup and formats the result.
+     * @param id The id to look for in the mappings file
+     * @return formatted result selected in the html file by Jsoup using the selector
      */
     public String getEntry(String id) {
-        String mappings;
-        try {
-            mappings = new JsonParser().parse(new InputStreamReader(new URL(location).openStream())).toString();
-            if (mappings == null) throw new NullPointerException("Mappings location cannot be null!");
-            JsonArray jsonArray = (JsonArray) new JsonParser().parse(mappings);
+        JsonArray mappingArray = new JsonParser().parse(jsonReader).getAsJsonArray();
 
-            for (int i = 0; i < jsonArray.size(); i++) {
-                JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-                if (jsonObject.get("id").getAsString().equals(id)) {
-                    if (jsonObject.get("filter") != null) {
-                        String regex = Pattern.compile(doc.select(jsonObject.get("filter").getAsString()).text()).toString();
-                        return doc.select(jsonObject.get("selector").getAsString()).text().replaceAll(regex, "");
-                    }
-                    return doc.select(jsonObject.get("selector").getAsString()).text();
-                }
+        for (JsonElement mapping : mappingArray) {
+            MappingsEntry mappingsEntry = new Gson().fromJson(mapping, MappingsEntry.class);
+
+            if (mappingsEntry.id.equals(id)) {
+                if (mappingsEntry.selector == null) return null;
+                String result = document.select(mappingsEntry.selector).text();
+                return result.replaceAll(String.valueOf(Pattern.compile(mappingsEntry.filter)), "");
             }
-        } catch (IOException e) {
-            return null;
         }
+
         return null;
+    }
+
+    /**
+     * Represents one given entry in an array of mapping entries
+     */
+    private class MappingsEntry {
+        private String id;
+        private String selector;
+        private String filter;
     }
 }

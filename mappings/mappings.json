@@ -1,4 +1,12 @@
 [
-	{ "id": "globalKills", "selector": "html body div.container section div.row div.span7 div.row-fluid div.span8 div.row-fluid div.span5 h2[title]", "attribute": "title", "filter": "^.*kills.*$" },
-	{ "id": "globalDeaths", "selector": "html body div.container section div.row div.span7 div.row-fluid div.span4 h2", "attribute": "title", "filter": "^.*deaths.*$" }
+  {
+	"id": "globalKills",
+	"selector": "html body div.container section div.row div.span7 div.row-fluid div.span8 div.row-fluid div.span5 h2[title]",
+	"filter": "^.*kills.*$"
+  },
+  {
+	"id": "globalDeaths",
+	"selector": "html body div.container section div.row div.span7 div.row-fluid div.span4 h2[title]",
+	"filter": "^.*deaths.*$"
+  }
 ]
