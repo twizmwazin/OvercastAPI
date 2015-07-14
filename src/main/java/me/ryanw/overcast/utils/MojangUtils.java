@@ -35,8 +35,13 @@ public class MojangUtils {
         try {
             String url = "https://api.mojang.com/user/profiles/" + uuid.replaceAll("-", "")+ "/names";
             JsonArray usernameArray = new JsonParser().parse(new InputStreamReader(new URL(url).openStream())).getAsJsonArray();
-            JsonObject usernameElement = usernameArray.get(usernameArray.size() - 2).getAsJsonObject();
-            return usernameElement.get("name").getAsString();
+
+            if (usernameArray.size() >= 2) {
+                JsonObject usernameElement = usernameArray.get(usernameArray.size() - 2).getAsJsonObject();
+                return usernameElement.get("name").getAsString();
+            }
+
+            return null;
         } catch (IOException e) {
             return null;
         }
