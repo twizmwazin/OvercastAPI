@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
@@ -17,7 +16,7 @@ import java.util.regex.Pattern;
 
 public class MappingsParser {
 
-    private final String url = "https://raw.githubusercontent.com/ryanw-se/OvercastAPI/master/mappings/mappings.json";
+    private final String url = "https://github.com/ryanw-se/OvercastAPI/blob/master/mappings/mappings.json";
     private final Document document;
 
     public MappingsParser(Document document) throws IOException {
@@ -130,16 +129,22 @@ public class MappingsParser {
                 }
 
                 String payload = document.select(mappingsEntry.selector).text();
-                Pattern regex = Pattern.compile(mappingsEntry.filter);
-                Matcher matcher = regex.matcher(payload);
+                String result = payload;
 
-                while (matcher.find()) {
-                    matches.add(matcher.group().trim());
+                if (mappingsEntry.filter != null) {
+                    Pattern regex = Pattern.compile(mappingsEntry.filter);
+                    Matcher matcher = regex.matcher(payload);
+
+                    while (matcher.find()) {
+                        matches.add(matcher.group().trim());
+                    }
+
+                    StringBuilder builder = new StringBuilder(matches.size());
+                    for (String string : matches) builder.append(string);
+                    result = builder.toString().trim();
                 }
 
-                StringBuilder builder = new StringBuilder(matches.size());
-                for (String string : matches) builder.append(string);
-                return builder.toString().trim();
+                return result;
             }
         }
 
