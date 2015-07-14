@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import me.ryanw.overcast.mappings.MappingsParser;
+import me.ryanw.overcast.utils.MojangUtils;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ public class OvercastPlayer {
     public OvercastPlayer(Document doc) throws IOException {
         MappingsParser parser = new MappingsParser(doc);
         this.username = parser.getString("username");
+        this.formerUsername = Optional.fromNullable(MojangUtils.getFormerUsername(MojangUtils.getUUID(username)));
         this.globalKills = parser.getInteger("globalKills");
         this.globalDeaths = parser.getInteger("globalDeaths");
     }
@@ -94,7 +96,7 @@ public class OvercastPlayer {
     public String toString() {
         return "Player{" +
                 "username='" + username + '\'' +
-                ", formerUsername='" + "not_implemented_yet" + '\'' +
+                ", formerUsername='" + formerUsername.get() + '\'' +
                 ", friends=" + friends +
                 ", globalKills=" + globalKills +
                 ", globalDeaths=" + globalDeaths +
