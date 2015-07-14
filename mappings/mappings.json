@@ -1,5 +1,9 @@
 [
   {
+	"id": "username",
+	"selector": "html body div.container section div.page-header h1 span"
+  },
+  {
 	"id": "globalKills",
 	"selector": "html body div.container section div.row div.span7 div.row-fluid div.span8 div.row-fluid div.span5 h2[title]",
 	"filter": "[0-9]"

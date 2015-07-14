@@ -16,8 +16,7 @@ public class OvercastPlayer {
 
     public OvercastPlayer(Document doc) throws IOException {
         MappingsParser parser = new MappingsParser(doc);
-        //this.username = parser.getString("username");
-        //this.formerUsername = Optional.fromNullable(parser.getString("formerUsername"));
+        this.username = parser.getString("username");
         this.globalKills = parser.getInteger("globalKills");
         this.globalDeaths = parser.getInteger("globalDeaths");
     }
@@ -95,7 +94,7 @@ public class OvercastPlayer {
     public String toString() {
         return "Player{" +
                 "username='" + username + '\'' +
-                ", formerUsername='" + /**formerUsername.get()**/ "test" + '\'' +
+                ", formerUsername='" + "not_implemented_yet" + '\'' +
                 ", friends=" + friends +
                 ", globalKills=" + globalKills +
                 ", globalDeaths=" + globalDeaths +
