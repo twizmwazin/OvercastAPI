@@ -95,7 +95,7 @@ public class OvercastPlayer {
     public String toString() {
         return "Player{" +
                 "username='" + username + '\'' +
-                ", formerUsername='" + formerUsername.get() + '\'' +
+                ", formerUsername='" + /**formerUsername.get()**/ "test" + '\'' +
                 ", friends=" + friends +
                 ", globalKills=" + globalKills +
                 ", globalDeaths=" + globalDeaths +
