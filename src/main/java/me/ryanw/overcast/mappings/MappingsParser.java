@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 
 public class MappingsParser {
 
-    private final String url = "https://github.com/ryanw-se/OvercastAPI/blob/master/mappings/mappings.json";
+    private final String url = "https://raw.githubusercontent.com/ryanw-se/OvercastAPI/master/mappings/mappings.json";
     private final Document document;
 
     public MappingsParser(Document document) throws IOException {
