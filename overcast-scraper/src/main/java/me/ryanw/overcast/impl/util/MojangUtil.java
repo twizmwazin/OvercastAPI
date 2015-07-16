@@ -1,4 +1,4 @@
-package me.ryanw.overcast.utils;
+package me.ryanw.overcast.impl.util;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
-public class MojangUtils {
+public class MojangUtil {
 
     /**
      * Fetches the username of a user by passing a UUID as a string. This function supports both full and trimmed UUIDs.

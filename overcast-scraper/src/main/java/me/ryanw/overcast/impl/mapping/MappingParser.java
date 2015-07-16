@@ -1,4 +1,4 @@
-package me.ryanw.overcast.mappings;
+package me.ryanw.overcast.impl.mapping;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MappingsParser {
+public class MappingParser {
 
     private final String url = "https://raw.githubusercontent.com/ryanw-se/OvercastAPI/master/mappings/mappings.json";
     private final Document document;
 
-    public MappingsParser(Document document) throws IOException {
+    public MappingParser(Document document) throws IOException {
         this.document = document;
     }
 

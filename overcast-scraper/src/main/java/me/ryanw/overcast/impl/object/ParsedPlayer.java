@@ -1,22 +1,18 @@
-package me.ryanw.overcast.objects;
+package me.ryanw.overcast.impl.object;
 
 import com.google.common.base.Optional;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
-import me.ryanw.overcast.mappings.MappingsParser;
-import me.ryanw.overcast.utils.MojangUtils;
+import me.ryanw.overcast.impl.api.OvercastPlayer;
+import me.ryanw.overcast.impl.mapping.MappingParser;
+import me.ryanw.overcast.impl.util.MojangUtils;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 import java.util.List;
 
-@Setter(AccessLevel.PRIVATE)
-@Getter(AccessLevel.PUBLIC)
-public class OvercastPlayer {
+public class ParsedPlayer implements OvercastPlayer {
 
-    public OvercastPlayer(Document doc) throws IOException {
-        MappingsParser parser = new MappingsParser(doc);
+    public ParsedPlayer(Document doc) throws IOException {
+        MappingParser parser = new MappingParser(doc);
 
         this.username = parser.getString("username");
         this.formerUsername = Optional.fromNullable(MojangUtils.getFormerUsername(MojangUtils.getUUID(username)));
@@ -144,5 +140,230 @@ public class OvercastPlayer {
                 ", githubHandle=" + githubHandle +
                 ", redditHandle=" + redditHandle +
                 '}';
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public Optional<String> getFormerUsername() {
+        return formerUsername;
+    }
+
+    @Override
+    public List<OvercastPlayer> getFriends() {
+        return friends;
+    }
+
+    @Override
+    public int getGlobalKills() {
+        return globalKills;
+    }
+
+    @Override
+    public int getGlobalDeaths() {
+        return globalDeaths;
+    }
+
+    @Override
+    public int getGlobalKdRatio() {
+        return globalKdRatio;
+    }
+
+    @Override
+    public int getGlobalKkRatio() {
+        return globalKkRatio;
+    }
+
+    @Override
+    public int getGlobalDaysPlayed() {
+        return globalDaysPlayed;
+    }
+
+    @Override
+    public int getProjectAresKills() {
+        return projectAresKills;
+    }
+
+    @Override
+    public int getProjectAresDeaths() {
+        return projectAresDeaths;
+    }
+
+    @Override
+    public int getProjectAresKd() {
+        return projectAresKd;
+    }
+
+    @Override
+    public int getProjectAresKk() {
+        return projectAresKk;
+    }
+
+    @Override
+    public int getProjectAresDaysPlayed() {
+        return projectAresDaysPlayed;
+    }
+
+    @Override
+    public int getProjectAresDayObserved() {
+        return projectAresDayObserved;
+    }
+
+    @Override
+    public int getBlitzKills() {
+        return blitzKills;
+    }
+
+    @Override
+    public int getBlitzDeaths() {
+        return blitzDeaths;
+    }
+
+    @Override
+    public int getBlitzKd() {
+        return blitzKd;
+    }
+
+    @Override
+    public int getBlitzKk() {
+        return blitzKk;
+    }
+
+    @Override
+    public int getBlitzDaysPlayed() {
+        return blitzDaysPlayed;
+    }
+
+    @Override
+    public int getBlitzDaysObserved() {
+        return blitzDaysObserved;
+    }
+
+    @Override
+    public int getGhostSquadronKills() {
+        return ghostSquadronKills;
+    }
+
+    @Override
+    public int getGhostSquadronDeaths() {
+        return ghostSquadronDeaths;
+    }
+
+    @Override
+    public int getGhostSquadronKd() {
+        return ghostSquadronKd;
+    }
+
+    @Override
+    public int getGhostSquadronKk() {
+        return ghostSquadronKk;
+    }
+
+    @Override
+    public int getGhostSquadronDaysPlayed() {
+        return ghostSquadronDaysPlayed;
+    }
+
+    @Override
+    public int getGhostSquadronDaysObserved() {
+        return ghostSquadronDaysObserved;
+    }
+
+    @Override
+    public int getServerJoins() {
+        return serverJoins;
+    }
+
+    @Override
+    public int getRaindrops() {
+        return raindrops;
+    }
+
+    @Override
+    public int getForumPosts() {
+        return forumPosts;
+    }
+
+    @Override
+    public int getForumTopics() {
+        return forumTopics;
+    }
+
+    @Override
+    public int getMonumentsDestroyed() {
+        return monumentsDestroyed;
+    }
+
+    @Override
+    public int getWoolsPlaced() {
+        return woolsPlaced;
+    }
+
+    @Override
+    public int getCoresLeaked() {
+        return coresLeaked;
+    }
+
+    @Override
+    public Optional<String> getGender() {
+        return gender;
+    }
+
+    @Override
+    public Optional<String> getLocation() {
+        return location;
+    }
+
+    @Override
+    public Optional<String> getOccupation() {
+        return occupation;
+    }
+
+    @Override
+    public Optional<String> getInterests() {
+        return interests;
+    }
+
+    @Override
+    public Optional<String> getBiography() {
+        return biography;
+    }
+
+    @Override
+    public Optional<String> getSkypeHandle() {
+        return skypeHandle;
+    }
+
+    @Override
+    public Optional<String> getSteamHandle() {
+        return steamHandle;
+    }
+
+    @Override
+    public Optional<String> getTwitterHandle() {
+        return twitterHandle;
+    }
+
+    @Override
+    public Optional<String> getTwitchHandle() {
+        return twitchHandle;
+    }
+
+    @Override
+    public Optional<String> getFacebookHandle() {
+        return facebookHandle;
+    }
+
+    @Override
+    public Optional<String> getGithubHandle() {
+        return githubHandle;
+    }
+
+    @Override
+    public Optional<String> getRedditHandle() {
+        return redditHandle;
     }
 }
